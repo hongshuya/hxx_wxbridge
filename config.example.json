@@ -1,0 +1,20 @@
+{
+  "_note": "复制成 wxbridge-config.json 再改；字段含义见 README。",
+  "_note_autoGroups": "autoGroups=true 表示被拉进新群也生效（groupSpontaneousRate 仍生效）。",
+
+  "whitelist": ["Alice"],
+  "groups": [],
+  "autoGroups": true,
+  "groupSpontaneousRate": 0.05,
+  "selfNickname": "小号昵称",
+  "mentionKeywords": ["小号昵称"],
+
+  "capture": "auto",
+  "autoRaise": false,
+  "pollSeconds": 3,
+  "rateLimitPerMinute": 8,
+  "mediaDir": "media",
+
+  "agentPermission": "ask",
+  "agentWorkspace": ""
+}

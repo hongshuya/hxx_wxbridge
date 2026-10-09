@@ -1,0 +1,30 @@
+# 运行时产物：别提交
+wxbridge.log
+wxbridge.log.*
+wxbridge-cmd.txt
+wxbridge-cmd.out
+wxbridge-cmd.json
+wxbridge-state.json
+wxbridge-config.json
+wxbridge*.pid
+*.pid
+wx-small.pid
+wxbridge.diag.log
+wxbridge-diag.flag
+
+# 截图与媒体（含聊天内容）
+media/
+shots/
+*.png
+*.jpg
+*.jpeg
+*.webp
+
+# 本地环境
+dsh-home/
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.env
