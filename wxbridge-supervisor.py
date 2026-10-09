@@ -168,7 +168,7 @@ def log_diag(hints):
     except Exception as exc:  # noqa: BLE001
         log("find_small_pid 失败: %s: %s" % (type(exc).__name__, exc))
     # 截图 + OCR：看清这台机上现在的那个微信实例到底是哪个号 ——
-    # 小号的会话列表里有「Alice」（主号），主号的列表里有「hong」（小号）。
+    # 小号的会话列表里有「Alice」（主号），主号的列表里有「alice」（小号）。
     try:
         wins = [w for w in W.all_windows(150)
                 if w.get("cls") == W.WECHAT_CLS and (w.get("size") or (0, 0))[0] >= 300]

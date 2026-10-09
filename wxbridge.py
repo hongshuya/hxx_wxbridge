@@ -226,7 +226,7 @@ SIG_NOISE_RE = re.compile(r"[\s（）()［］\[\]「」『』【】“”\"'‘�
 # 微信会话列表自己的「有人@我」标记（预览形如 `[有人@我]乐:小了`）。这是最可靠的点名信号：
 # 比按昵称匹配强得多 —— 改一次微信昵称，写死的 selfNickname 就失效了。
 MENTION_FLAG_RE = re.compile(r"有人\s*@\s*我")
-# 英数昵称（whale / hong / abc_1）：从被 @ 的文本里学新昵称用
+# 英数昵称（bob / alice / abc_1）：从被 @ 的文本里学新昵称用
 ASCII_MENTION_RE = re.compile(r"@([A-Za-z][A-Za-z0-9_\-]{1,24})")
 
 
@@ -375,7 +375,7 @@ class DshAgent:
         cwd = self.workdir if os.path.isdir(self.workdir) else None
         reply, sid, err, out = self._run(cmd, env, cwd)
         # 会话 id 与工作目录绑死：旧 id 是在别的 cwd 下建的，续用会直接报错
-        # （实测 `session "..." was recorded in "F:\node", not "...\workspace"`）。
+        # （实测 `session "..." was recorded in "<旧工作目录>", not "...<新工作目录>"`）。
         # 遇到这种情况丢掉旧 id、用当前工作目录重开一条会话再试一次。
         if sid and ("was recorded in" in (reply or "") or "was recorded in" in err):
             print("  ! 旧会话的工作目录对不上，重开一条会话（丢掉 %s）" % sid)
@@ -1222,7 +1222,7 @@ class Bridge:
             mentioned = self.is_mentioned(text, name)
             if not mentioned and time.time() - self._list_mentions.get(name, 0) < 600:
                 # 微信列表说「有人@我」，但按昵称没匹配上：多半是小号昵称改了。
-                # 顺手学一下：正文里 @ 后面若是英数名（whale / hong）就记进这个群，下次直接匹配。
+                # 顺手学一下：正文里 @ 后面若是英数名（bob / alice）就记进这个群，下次直接匹配。
                 who = ASCII_MENTION_RE.search(text)
                 if who:
                     learned = st.setdefault("learned_names", [])
@@ -1275,7 +1275,7 @@ class Bridge:
 
         「@昵称」或直接出现昵称都算。`name` 给群名时会把它学到的昵称（learned_names）
         也算上 —— 用户改一次微信昵称，写死的 selfNickname 就失效了（踩过：小号改叫
-        whale，群里 @whale 了，桥还拿 hong 去比 → 判「没人@我」不回）。
+        bob，群里 @bob 了，桥还拿 alice 去比 → 判「没人@我」不回）。
         """
         kws = [str(x) for x in self.cfg.get("mentionKeywords", [])]
         nick = str(self.cfg.get("selfNickname", "") or "").strip()

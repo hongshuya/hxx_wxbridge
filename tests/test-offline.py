@@ -140,7 +140,7 @@ check("短文不切", b.split_reply("嗯") == ["嗯"])
 check("空行被丢掉", b.split_reply("a\n\n\nb") == ["a\nb"])
 
 print("⑤ is_mentioned")
-for text, want in [("@hong 在吗", True), ("hong 你怎么看", True), ("@hong：说说", True),
+for text, want in [("@alice 在吗", True), ("alice 你怎么看", True), ("@alice：说说", True),
                    ("@所有人 开会", False), ("今天天气不错", False)]:
     check("%r → %s" % (text, want), b.is_mentioned(text) == want)
 c2 = cfg(); c2["mentionKeywords"] = ["鲸鱼娘"]
@@ -178,7 +178,7 @@ def group_poll(rate, rnd, mention, rounds=3, primed=True):
         return im
 
     b3.capture = lambda *a, **k: make_img()
-    text = "@hong 在吗" if mention else "今天天气不错"
+    text = "@alice 在吗" if mention else "今天天气不错"
     b3.messages = lambda img, x0, y0, w, img_regions=None: [{"y": 300, "x0": 100, "cx": 200, "side": "in", "text": text}]
     b3.grouped = lambda msgs, w: msgs
     b3.image_items = lambda img, w, h, regions=None, px=0: []

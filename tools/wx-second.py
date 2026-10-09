@@ -10,8 +10,8 @@
     python wx-second.py --dry     # 只看现在有几个实例、分别是谁（不动任何东西）
     python wx-second.py           # 没有两个就再拉一个起来
 
-认人方法：截会话列表做 OCR —— 列表里有「Alice」的是小号（hong），
-列表里有「hong」的是主号。认不出来基本就是还没登录的登录窗。
+认人方法：截会话列表做 OCR —— 列表里有「Alice」的是小号（alice），
+列表里有「alice」的是主号。认不出来基本就是还没登录的登录窗。
 """
 import os
 import subprocess
@@ -25,7 +25,7 @@ import wxvision as W  # noqa: E402
 WEIXIN = os.environ.get("WECHAT_EXE", ros.environ.get("WECHAT_EXE", r"C:\Program Files (x86)\Tencent\Weixin\Weixin.exe"))
 DETACHED = 0x00000008 | 0x00000200          # DETACHED_PROCESS | CREATE_NEW_PROCESS_GROUP
 SMALL_HINT = "Alice"                       # 小号的会话列表里一定有主号
-MAIN_HINT = "hong"                           # 主号的会话列表里一定有这个小号
+MAIN_HINT = "alice"                           # 主号的会话列表里一定有这个小号
 
 
 def instances():
@@ -46,7 +46,7 @@ def who(win):
     except Exception as exc:  # noqa: BLE001
         return "认不出（%s）" % type(exc).__name__, ""
     if W._norm_text(SMALL_HINT) in text:
-        return "小号（hong）", "列表里有「%s」" % SMALL_HINT
+        return "小号（alice）", "列表里有「%s」" % SMALL_HINT
     if W._norm_text(MAIN_HINT) in text:
         return "主号", "列表里有「%s」" % MAIN_HINT
     return "认不出（可能还没登录）", ""

@@ -149,7 +149,7 @@ def _weixin_procs():
 
 
 def _norm_text(s):
-    """只留字母数字并小写：OCR 会把「Alice」认成「.missu（粉毛？）」，必须这样比。"""
+    """只留字母数字并小写：OCR 会把「Alice」认成「Alice」，必须这样比。"""
     return "".join(ch for ch in (s or "").lower() if ch.isalnum())
 
 
@@ -161,7 +161,7 @@ def identify_by_ocr(win, hints, force=False):
     """截图 + OCR 会话列表，判断这个微信窗口是不是小号。
 
     判据：小号的会话列表里一定会出现白名单联系人（如「Alice」）。
-    主号的列表里只有小号（如「hong」），所以这个判据不会把主号认成小号。
+    主号的列表里只有小号（如「alice」），所以这个判据不会把主号认成小号。
     """
     global _LAST_OCR_ID_TRY
     hs = [_norm_text(h) for h in (hints or ()) if h]

@@ -3,7 +3,7 @@
 HERE = os.path.dirname(os.path.abspath(__file__))
 @echo off
 chcp 65001 >nul
-title open a second WeChat (hong / whale girl)
+title open a second WeChat (alice / bob girl)
 
 set "PY=C:\Users\86152\AppData\Local\Programs\Python\Python313\python.exe"
 if not exist "%PY%" set "PY=python"
